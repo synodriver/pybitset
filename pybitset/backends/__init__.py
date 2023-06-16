@@ -19,3 +19,5 @@ def _should_use_cffi() -> bool:
 
 if not _should_use_cffi():
     from pybitset.backends.cython import BitSet
+else:
+    from pybitset.backends.cffi import BitSet

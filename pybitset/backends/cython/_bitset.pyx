@@ -4,14 +4,14 @@ cimport cython
 
 from pybitset.backends.cython.bitset cimport (
     bitset_clear, bitset_contains_all, bitset_copy, bitset_count,
-    bitset_create, bitset_difference_count, bitset_fill, bitset_for_each,
-    bitset_free, bitset_get, bitset_grow, bitset_inplace_difference,
-    bitset_inplace_intersection, bitset_inplace_symmetric_difference,
-    bitset_inplace_union, bitset_intersection_count, bitset_iterator,
-    bitset_maximum, bitset_minimum, bitset_next_set_bit, bitset_next_set_bits,
-    bitset_print, bitset_resize, bitset_set, bitset_set_to_value,
-    bitset_shift_left, bitset_shift_right, bitset_size_in_bits,
-    bitset_size_in_bytes, bitset_size_in_words,
+    bitset_create, bitset_create_with_capacity, bitset_difference_count,
+    bitset_fill, bitset_for_each, bitset_free, bitset_get, bitset_grow,
+    bitset_inplace_difference, bitset_inplace_intersection,
+    bitset_inplace_symmetric_difference, bitset_inplace_union,
+    bitset_intersection_count, bitset_iterator, bitset_maximum, bitset_minimum,
+    bitset_next_set_bit, bitset_next_set_bits, bitset_print, bitset_resize,
+    bitset_set, bitset_set_to_value, bitset_shift_left, bitset_shift_right,
+    bitset_size_in_bits, bitset_size_in_bytes, bitset_size_in_words,
     bitset_symmetric_difference_count, bitset_t, bitset_trim,
     bitset_union_count, bitsets_disjoint, bitsets_intersect)
 
@@ -24,8 +24,11 @@ cdef bint bitset_iterator_func(size_t value, void *param) with gil:
 @cython.no_gc
 cdef class BitSet:
     cdef bitset_t * _bitset
-    def __cinit__(self):
-        self._bitset = bitset_create()
+    def __cinit__(self, size_t size=0):
+        if size == 0:
+            self._bitset = bitset_create()
+        else:
+            self._bitset = bitset_create_with_capacity(size)
         if not self._bitset:
             raise MemoryError
 

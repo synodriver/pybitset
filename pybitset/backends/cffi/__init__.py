@@ -1,8 +1,9 @@
 """
 Copyright (c) 2008-2023 synodriver <diguohuangjiajinweijun@gmail.com>
 """
-from pybitset.backends.cffi._bitset import ffi, lib
 import pyrsync
+
+from pybitset.backends.cffi._bitset import ffi, lib
 
 
 @ffi.def_extern()
@@ -35,8 +36,11 @@ class BitSetIter:
 
 class BitSet:
     # cdef lib.bitset_t * _bitset
-    def __init__(self):
-        self._bitset = lib.bitset_create()
+    def __init__(self, size: int = 0):
+        if size == 0:
+            self._bitset = lib.bitset_create()
+        else:
+            self._bitset = lib.bitset_create_with_capacity(size)
         if not self._bitset:
             raise MemoryError
 
