@@ -36,13 +36,16 @@ class BitSetIter:
 
 class BitSet:
     # cdef lib.bitset_t * _bitset
-    def __init__(self, size: int = 0):
-        if size == 0:
-            self._bitset = lib.bitset_create()
+    def __init__(self, size: int = 0, _init: bool = True):
+        if _init:
+            if size == 0:
+                self._bitset = lib.bitset_create()
+            else:
+                self._bitset = lib.bitset_create_with_capacity(size)
+            if not self._bitset:
+                raise MemoryError
         else:
-            self._bitset = lib.bitset_create_with_capacity(size)
-        if not self._bitset:
-            raise MemoryError
+            self._bitset = ffi.NULL
 
     def __del__(self):
         lib.bitset_free(self._bitset)
@@ -50,7 +53,7 @@ class BitSet:
 
     @staticmethod
     def from_ptr(ptr) -> "BitSet":
-        self = BitSet.__new__(BitSet)
+        self = BitSet(_init=False)
         self._bitset = ptr
         return self
 

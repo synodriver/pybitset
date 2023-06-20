@@ -24,13 +24,16 @@ cdef bint bitset_iterator_func(size_t value, void *param) with gil:
 @cython.no_gc
 cdef class BitSet:
     cdef bitset_t * _bitset
-    def __cinit__(self, size_t size=0):
-        if size == 0:
-            self._bitset = bitset_create()
+    def __cinit__(self, size_t size=0, bint _init = True):
+        if _init:
+            if size == 0:
+                self._bitset = bitset_create()
+            else:
+                self._bitset = bitset_create_with_capacity(size)
+            if not self._bitset:
+                raise MemoryError
         else:
-            self._bitset = bitset_create_with_capacity(size)
-        if not self._bitset:
-            raise MemoryError
+            self._bitset = NULL
 
     def __dealloc__(self):
         bitset_free(self._bitset)
@@ -38,7 +41,7 @@ cdef class BitSet:
 
     @staticmethod
     cdef inline BitSet from_ptr(bitset_t * ptr):
-        cdef BitSet self = BitSet.__new__(BitSet)
+        cdef BitSet self = BitSet(_init=False)
         self._bitset = ptr
         return self
 
