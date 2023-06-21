@@ -48,7 +48,8 @@ class BitSet:
             self._bitset = ffi.NULL
 
     def __del__(self):
-        lib.bitset_free(self._bitset)
+        if self._bitset:
+            lib.bitset_free(self._bitset)
         self._bitset = ffi.NULL
 
     @staticmethod

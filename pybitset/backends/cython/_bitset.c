@@ -1008,7 +1008,7 @@ struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet {
 };
 
 
-/* "pybitset/backends/cython/_bitset.pyx":217
+/* "pybitset/backends/cython/_bitset.pyx":218
  * @cython.final
  * @cython.no_gc
  * cdef class BitSetIter:             # <<<<<<<<<<<<<<
@@ -1844,8 +1844,8 @@ static int __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet___cinit__(struc
  *             self._bitset = NULL
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         bitset_free(self._bitset)
- *         self._bitset = NULL
+ *         if self._bitset:
+ *             bitset_free(self._bitset)
  */
 
 /* Python wrapper */
@@ -1861,20 +1861,40 @@ static void __pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_3__dealloc__(P
 
 static void __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_2__dealloc__(struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *__pyx_v_self) {
   __Pyx_RefNannyDeclarations
+  int __pyx_t_1;
   __Pyx_RefNannySetupContext("__dealloc__", 0);
 
   /* "pybitset/backends/cython/_bitset.pyx":39
  * 
  *     def __dealloc__(self):
- *         bitset_free(self._bitset)             # <<<<<<<<<<<<<<
+ *         if self._bitset:             # <<<<<<<<<<<<<<
+ *             bitset_free(self._bitset)
+ *         self._bitset = NULL
+ */
+  __pyx_t_1 = (__pyx_v_self->_bitset != 0);
+  if (__pyx_t_1) {
+
+    /* "pybitset/backends/cython/_bitset.pyx":40
+ *     def __dealloc__(self):
+ *         if self._bitset:
+ *             bitset_free(self._bitset)             # <<<<<<<<<<<<<<
  *         self._bitset = NULL
  * 
  */
-  bitset_free(__pyx_v_self->_bitset);
+    bitset_free(__pyx_v_self->_bitset);
 
-  /* "pybitset/backends/cython/_bitset.pyx":40
+    /* "pybitset/backends/cython/_bitset.pyx":39
+ * 
  *     def __dealloc__(self):
- *         bitset_free(self._bitset)
+ *         if self._bitset:             # <<<<<<<<<<<<<<
+ *             bitset_free(self._bitset)
+ *         self._bitset = NULL
+ */
+  }
+
+  /* "pybitset/backends/cython/_bitset.pyx":41
+ *         if self._bitset:
+ *             bitset_free(self._bitset)
  *         self._bitset = NULL             # <<<<<<<<<<<<<<
  * 
  *     @staticmethod
@@ -1885,15 +1905,15 @@ static void __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_2__dealloc__(s
  *             self._bitset = NULL
  * 
  *     def __dealloc__(self):             # <<<<<<<<<<<<<<
- *         bitset_free(self._bitset)
- *         self._bitset = NULL
+ *         if self._bitset:
+ *             bitset_free(self._bitset)
  */
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":43
+/* "pybitset/backends/cython/_bitset.pyx":44
  * 
  *     @staticmethod
  *     cdef inline BitSet from_ptr(bitset_t * ptr):             # <<<<<<<<<<<<<<
@@ -1912,23 +1932,23 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("from_ptr", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":44
+  /* "pybitset/backends/cython/_bitset.pyx":45
  *     @staticmethod
  *     cdef inline BitSet from_ptr(bitset_t * ptr):
  *         cdef BitSet self = BitSet(_init=False)             # <<<<<<<<<<<<<<
  *         self._bitset = ptr
  *         return self
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_init, Py_False) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_init, Py_False) < 0) __PYX_ERR(0, 45, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)__pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet), __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_self = ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":45
+  /* "pybitset/backends/cython/_bitset.pyx":46
  *     cdef inline BitSet from_ptr(bitset_t * ptr):
  *         cdef BitSet self = BitSet(_init=False)
  *         self._bitset = ptr             # <<<<<<<<<<<<<<
@@ -1937,7 +1957,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
  */
   __pyx_v_self->_bitset = __pyx_v_ptr;
 
-  /* "pybitset/backends/cython/_bitset.pyx":46
+  /* "pybitset/backends/cython/_bitset.pyx":47
  *         cdef BitSet self = BitSet(_init=False)
  *         self._bitset = ptr
  *         return self             # <<<<<<<<<<<<<<
@@ -1949,7 +1969,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
   __pyx_r = __pyx_v_self;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":43
+  /* "pybitset/backends/cython/_bitset.pyx":44
  * 
  *     @staticmethod
  *     cdef inline BitSet from_ptr(bitset_t * ptr):             # <<<<<<<<<<<<<<
@@ -1970,7 +1990,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":48
+/* "pybitset/backends/cython/_bitset.pyx":49
  *         return self
  * 
  *     cpdef inline clear(self):             # <<<<<<<<<<<<<<
@@ -1984,7 +2004,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("clear", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":49
+  /* "pybitset/backends/cython/_bitset.pyx":50
  * 
  *     cpdef inline clear(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -1999,7 +2019,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":50
+        /* "pybitset/backends/cython/_bitset.pyx":51
  *     cpdef inline clear(self):
  *         with nogil:
  *             bitset_clear(self._bitset)             # <<<<<<<<<<<<<<
@@ -2009,7 +2029,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_clear(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":49
+      /* "pybitset/backends/cython/_bitset.pyx":50
  * 
  *     cpdef inline clear(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2028,7 +2048,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":48
+  /* "pybitset/backends/cython/_bitset.pyx":49
  *         return self
  * 
  *     cpdef inline clear(self):             # <<<<<<<<<<<<<<
@@ -2066,7 +2086,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_4clear(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("clear", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_clear(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_clear(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2083,7 +2103,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_4clear(st
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":52
+/* "pybitset/backends/cython/_bitset.pyx":53
  *             bitset_clear(self._bitset)
  * 
  *     cpdef inline fill(self):             # <<<<<<<<<<<<<<
@@ -2097,7 +2117,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("fill", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":53
+  /* "pybitset/backends/cython/_bitset.pyx":54
  * 
  *     cpdef inline fill(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2112,7 +2132,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":54
+        /* "pybitset/backends/cython/_bitset.pyx":55
  *     cpdef inline fill(self):
  *         with nogil:
  *             bitset_fill(self._bitset)             # <<<<<<<<<<<<<<
@@ -2122,7 +2142,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_fill(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":53
+      /* "pybitset/backends/cython/_bitset.pyx":54
  * 
  *     cpdef inline fill(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2141,7 +2161,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":52
+  /* "pybitset/backends/cython/_bitset.pyx":53
  *             bitset_clear(self._bitset)
  * 
  *     cpdef inline fill(self):             # <<<<<<<<<<<<<<
@@ -2179,7 +2199,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_6fill(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("fill", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fill(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fill(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2196,7 +2216,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_6fill(str
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":56
+/* "pybitset/backends/cython/_bitset.pyx":57
  *             bitset_fill(self._bitset)
  * 
  *     cpdef inline BitSet copy(self):             # <<<<<<<<<<<<<<
@@ -2215,7 +2235,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("copy", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":58
+  /* "pybitset/backends/cython/_bitset.pyx":59
  *     cpdef inline BitSet copy(self):
  *         cdef bitset_t *ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2230,7 +2250,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":59
+        /* "pybitset/backends/cython/_bitset.pyx":60
  *         cdef bitset_t *ret
  *         with nogil:
  *             ret = bitset_copy(self._bitset)             # <<<<<<<<<<<<<<
@@ -2240,7 +2260,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
         __pyx_v_ret = bitset_copy(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":58
+      /* "pybitset/backends/cython/_bitset.pyx":59
  *     cpdef inline BitSet copy(self):
  *         cdef bitset_t *ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2259,7 +2279,7 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":60
+  /* "pybitset/backends/cython/_bitset.pyx":61
  *         with nogil:
  *             ret = bitset_copy(self._bitset)
  *         return BitSet.from_ptr(ret)             # <<<<<<<<<<<<<<
@@ -2267,13 +2287,13 @@ static CYTHON_INLINE struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSe
  *     cpdef inline bint resize(self, size_t newarraysize, bint padwithzeroes):
  */
   __Pyx_XDECREF(((PyObject *)__pyx_r));
-  __pyx_t_1 = ((PyObject *)__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_from_ptr(__pyx_v_ret)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_from_ptr(__pyx_v_ret)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_t_1);
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":56
+  /* "pybitset/backends/cython/_bitset.pyx":57
  *             bitset_fill(self._bitset)
  * 
  *     cpdef inline BitSet copy(self):             # <<<<<<<<<<<<<<
@@ -2315,7 +2335,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_8copy(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("copy", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = ((PyObject *)__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_copy(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = ((PyObject *)__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_copy(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2332,7 +2352,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_8copy(str
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":62
+/* "pybitset/backends/cython/_bitset.pyx":63
  *         return BitSet.from_ptr(ret)
  * 
  *     cpdef inline bint resize(self, size_t newarraysize, bint padwithzeroes):             # <<<<<<<<<<<<<<
@@ -2347,7 +2367,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_re
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("resize", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":64
+  /* "pybitset/backends/cython/_bitset.pyx":65
  *     cpdef inline bint resize(self, size_t newarraysize, bint padwithzeroes):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2362,7 +2382,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_re
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":65
+        /* "pybitset/backends/cython/_bitset.pyx":66
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_resize(self._bitset,  newarraysize, padwithzeroes)             # <<<<<<<<<<<<<<
@@ -2372,7 +2392,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_re
         __pyx_v_ret = bitset_resize(__pyx_v_self->_bitset, __pyx_v_newarraysize, __pyx_v_padwithzeroes);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":64
+      /* "pybitset/backends/cython/_bitset.pyx":65
  *     cpdef inline bint resize(self, size_t newarraysize, bint padwithzeroes):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2391,7 +2411,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_re
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":66
+  /* "pybitset/backends/cython/_bitset.pyx":67
  *         with nogil:
  *             ret = bitset_resize(self._bitset,  newarraysize, padwithzeroes)
  *         return ret             # <<<<<<<<<<<<<<
@@ -2401,7 +2421,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_re
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":62
+  /* "pybitset/backends/cython/_bitset.pyx":63
  *         return BitSet.from_ptr(ret)
  * 
  *     cpdef inline bint resize(self, size_t newarraysize, bint padwithzeroes):             # <<<<<<<<<<<<<<
@@ -2450,11 +2470,11 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_11resize(
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_padwithzeroes)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, 1); __PYX_ERR(0, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, 1); __PYX_ERR(0, 63, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "resize") < 0)) __PYX_ERR(0, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "resize") < 0)) __PYX_ERR(0, 63, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -2462,12 +2482,12 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_11resize(
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_newarraysize = __Pyx_PyInt_As_size_t(values[0]); if (unlikely((__pyx_v_newarraysize == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
-    __pyx_v_padwithzeroes = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_padwithzeroes == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 62, __pyx_L3_error)
+    __pyx_v_newarraysize = __Pyx_PyInt_As_size_t(values[0]); if (unlikely((__pyx_v_newarraysize == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
+    __pyx_v_padwithzeroes = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_padwithzeroes == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("resize", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 63, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pybitset.backends.cython._bitset.BitSet.resize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -2489,7 +2509,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_10resize(
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("resize", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_resize(__pyx_v_self, __pyx_v_newarraysize, __pyx_v_padwithzeroes, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_resize(__pyx_v_self, __pyx_v_newarraysize, __pyx_v_padwithzeroes, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2506,7 +2526,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_10resize(
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":68
+/* "pybitset/backends/cython/_bitset.pyx":69
  *         return ret
  * 
  *     cpdef inline size_t size_in_bytes(self):             # <<<<<<<<<<<<<<
@@ -2521,7 +2541,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("size_in_bytes", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":70
+  /* "pybitset/backends/cython/_bitset.pyx":71
  *     cpdef inline size_t size_in_bytes(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2536,7 +2556,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":71
+        /* "pybitset/backends/cython/_bitset.pyx":72
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_size_in_bytes(self._bitset)             # <<<<<<<<<<<<<<
@@ -2546,7 +2566,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_size_in_bytes(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":70
+      /* "pybitset/backends/cython/_bitset.pyx":71
  *     cpdef inline size_t size_in_bytes(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2565,7 +2585,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":72
+  /* "pybitset/backends/cython/_bitset.pyx":73
  *         with nogil:
  *             ret = bitset_size_in_bytes(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -2575,7 +2595,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":68
+  /* "pybitset/backends/cython/_bitset.pyx":69
  *         return ret
  * 
  *     cpdef inline size_t size_in_bytes(self):             # <<<<<<<<<<<<<<
@@ -2612,7 +2632,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_12size_in
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("size_in_bytes", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_size_in_bytes(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_size_in_bytes(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2629,7 +2649,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_12size_in
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":74
+/* "pybitset/backends/cython/_bitset.pyx":75
  *         return ret
  * 
  *     cpdef inline size_t size_in_bits(self):             # <<<<<<<<<<<<<<
@@ -2644,7 +2664,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("size_in_bits", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":76
+  /* "pybitset/backends/cython/_bitset.pyx":77
  *     cpdef inline size_t size_in_bits(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2659,7 +2679,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":77
+        /* "pybitset/backends/cython/_bitset.pyx":78
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_size_in_bits(self._bitset)             # <<<<<<<<<<<<<<
@@ -2669,7 +2689,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_size_in_bits(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":76
+      /* "pybitset/backends/cython/_bitset.pyx":77
  *     cpdef inline size_t size_in_bits(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2688,7 +2708,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":78
+  /* "pybitset/backends/cython/_bitset.pyx":79
  *         with nogil:
  *             ret = bitset_size_in_bits(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -2698,7 +2718,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":74
+  /* "pybitset/backends/cython/_bitset.pyx":75
  *         return ret
  * 
  *     cpdef inline size_t size_in_bits(self):             # <<<<<<<<<<<<<<
@@ -2735,7 +2755,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_14size_in
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("size_in_bits", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_size_in_bits(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_size_in_bits(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2752,7 +2772,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_14size_in
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":80
+/* "pybitset/backends/cython/_bitset.pyx":81
  *         return ret
  * 
  *     cpdef inline size_t size_in_words(self):             # <<<<<<<<<<<<<<
@@ -2767,7 +2787,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("size_in_words", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":82
+  /* "pybitset/backends/cython/_bitset.pyx":83
  *     cpdef inline size_t size_in_words(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2782,7 +2802,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":83
+        /* "pybitset/backends/cython/_bitset.pyx":84
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_size_in_words(self._bitset)             # <<<<<<<<<<<<<<
@@ -2792,7 +2812,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_size_in_words(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":82
+      /* "pybitset/backends/cython/_bitset.pyx":83
  *     cpdef inline size_t size_in_words(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2811,7 +2831,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":84
+  /* "pybitset/backends/cython/_bitset.pyx":85
  *         with nogil:
  *             ret = bitset_size_in_words(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -2821,7 +2841,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":80
+  /* "pybitset/backends/cython/_bitset.pyx":81
  *         return ret
  * 
  *     cpdef inline size_t size_in_words(self):             # <<<<<<<<<<<<<<
@@ -2858,7 +2878,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_16size_in
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("size_in_words", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_size_in_words(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_size_in_words(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 81, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -2875,7 +2895,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_16size_in
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":86
+/* "pybitset/backends/cython/_bitset.pyx":87
  *         return ret
  * 
  *     cpdef inline bint grow(self, size_t newarraysize):             # <<<<<<<<<<<<<<
@@ -2890,7 +2910,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_gr
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("grow", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":88
+  /* "pybitset/backends/cython/_bitset.pyx":89
  *     cpdef inline bint grow(self, size_t newarraysize):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2905,7 +2925,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_gr
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":89
+        /* "pybitset/backends/cython/_bitset.pyx":90
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_grow(self._bitset, newarraysize)             # <<<<<<<<<<<<<<
@@ -2915,7 +2935,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_gr
         __pyx_v_ret = bitset_grow(__pyx_v_self->_bitset, __pyx_v_newarraysize);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":88
+      /* "pybitset/backends/cython/_bitset.pyx":89
  *     cpdef inline bint grow(self, size_t newarraysize):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -2934,7 +2954,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_gr
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":90
+  /* "pybitset/backends/cython/_bitset.pyx":91
  *         with nogil:
  *             ret = bitset_grow(self._bitset, newarraysize)
  *         return ret             # <<<<<<<<<<<<<<
@@ -2944,7 +2964,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_gr
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":86
+  /* "pybitset/backends/cython/_bitset.pyx":87
  *         return ret
  * 
  *     cpdef inline bint grow(self, size_t newarraysize):             # <<<<<<<<<<<<<<
@@ -2970,7 +2990,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_19grow(Py
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("grow (wrapper)", 0);
   assert(__pyx_arg_newarraysize); {
-    __pyx_v_newarraysize = __Pyx_PyInt_As_size_t(__pyx_arg_newarraysize); if (unlikely((__pyx_v_newarraysize == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
+    __pyx_v_newarraysize = __Pyx_PyInt_As_size_t(__pyx_arg_newarraysize); if (unlikely((__pyx_v_newarraysize == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 87, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2994,7 +3014,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_18grow(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("grow", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_grow(__pyx_v_self, __pyx_v_newarraysize, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_grow(__pyx_v_self, __pyx_v_newarraysize, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3011,7 +3031,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_18grow(st
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":92
+/* "pybitset/backends/cython/_bitset.pyx":93
  *         return ret
  * 
  *     cpdef inline bint trim(self):             # <<<<<<<<<<<<<<
@@ -3026,7 +3046,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_tr
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("trim", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":94
+  /* "pybitset/backends/cython/_bitset.pyx":95
  *     cpdef inline bint trim(self):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3041,7 +3061,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_tr
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":95
+        /* "pybitset/backends/cython/_bitset.pyx":96
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_trim(self._bitset)             # <<<<<<<<<<<<<<
@@ -3051,7 +3071,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_tr
         __pyx_v_ret = bitset_trim(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":94
+      /* "pybitset/backends/cython/_bitset.pyx":95
  *     cpdef inline bint trim(self):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3070,7 +3090,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_tr
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":96
+  /* "pybitset/backends/cython/_bitset.pyx":97
  *         with nogil:
  *             ret = bitset_trim(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -3080,7 +3100,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_tr
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":92
+  /* "pybitset/backends/cython/_bitset.pyx":93
  *         return ret
  * 
  *     cpdef inline bint trim(self):             # <<<<<<<<<<<<<<
@@ -3117,7 +3137,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_20trim(st
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("trim", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_trim(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_trim(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3134,7 +3154,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_20trim(st
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":98
+/* "pybitset/backends/cython/_bitset.pyx":99
  *         return ret
  * 
  *     cpdef inline shift_left(self, size_t s):             # <<<<<<<<<<<<<<
@@ -3148,7 +3168,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("shift_left", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":99
+  /* "pybitset/backends/cython/_bitset.pyx":100
  * 
  *     cpdef inline shift_left(self, size_t s):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3163,7 +3183,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":100
+        /* "pybitset/backends/cython/_bitset.pyx":101
  *     cpdef inline shift_left(self, size_t s):
  *         with nogil:
  *             bitset_shift_left(self._bitset, s)             # <<<<<<<<<<<<<<
@@ -3173,7 +3193,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_shift_left(__pyx_v_self->_bitset, __pyx_v_s);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":99
+      /* "pybitset/backends/cython/_bitset.pyx":100
  * 
  *     cpdef inline shift_left(self, size_t s):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3192,7 +3212,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":98
+  /* "pybitset/backends/cython/_bitset.pyx":99
  *         return ret
  * 
  *     cpdef inline shift_left(self, size_t s):             # <<<<<<<<<<<<<<
@@ -3219,7 +3239,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_23shift_l
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("shift_left (wrapper)", 0);
   assert(__pyx_arg_s); {
-    __pyx_v_s = __Pyx_PyInt_As_size_t(__pyx_arg_s); if (unlikely((__pyx_v_s == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L3_error)
+    __pyx_v_s = __Pyx_PyInt_As_size_t(__pyx_arg_s); if (unlikely((__pyx_v_s == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3243,7 +3263,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_22shift_l
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shift_left", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_shift_left(__pyx_v_self, __pyx_v_s, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_shift_left(__pyx_v_self, __pyx_v_s, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3260,7 +3280,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_22shift_l
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":102
+/* "pybitset/backends/cython/_bitset.pyx":103
  *             bitset_shift_left(self._bitset, s)
  * 
  *     cpdef inline shift_right(self, size_t s):             # <<<<<<<<<<<<<<
@@ -3274,7 +3294,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("shift_right", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":103
+  /* "pybitset/backends/cython/_bitset.pyx":104
  * 
  *     cpdef inline shift_right(self, size_t s):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3289,7 +3309,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":104
+        /* "pybitset/backends/cython/_bitset.pyx":105
  *     cpdef inline shift_right(self, size_t s):
  *         with nogil:
  *             bitset_shift_right(self._bitset, s)             # <<<<<<<<<<<<<<
@@ -3299,7 +3319,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_shift_right(__pyx_v_self->_bitset, __pyx_v_s);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":103
+      /* "pybitset/backends/cython/_bitset.pyx":104
  * 
  *     cpdef inline shift_right(self, size_t s):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3318,7 +3338,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":102
+  /* "pybitset/backends/cython/_bitset.pyx":103
  *             bitset_shift_left(self._bitset, s)
  * 
  *     cpdef inline shift_right(self, size_t s):             # <<<<<<<<<<<<<<
@@ -3345,7 +3365,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_25shift_r
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("shift_right (wrapper)", 0);
   assert(__pyx_arg_s); {
-    __pyx_v_s = __Pyx_PyInt_As_size_t(__pyx_arg_s); if (unlikely((__pyx_v_s == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L3_error)
+    __pyx_v_s = __Pyx_PyInt_As_size_t(__pyx_arg_s); if (unlikely((__pyx_v_s == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3369,7 +3389,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_24shift_r
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("shift_right", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_shift_right(__pyx_v_self, __pyx_v_s, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_shift_right(__pyx_v_self, __pyx_v_s, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3386,7 +3406,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_24shift_r
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":106
+/* "pybitset/backends/cython/_bitset.pyx":107
  *             bitset_shift_right(self._bitset, s)
  * 
  *     cpdef inline set(self,  size_t i):             # <<<<<<<<<<<<<<
@@ -3400,7 +3420,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":107
+  /* "pybitset/backends/cython/_bitset.pyx":108
  * 
  *     cpdef inline set(self,  size_t i):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3415,7 +3435,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":108
+        /* "pybitset/backends/cython/_bitset.pyx":109
  *     cpdef inline set(self,  size_t i):
  *         with nogil:
  *             bitset_set(self._bitset, i)             # <<<<<<<<<<<<<<
@@ -3425,7 +3445,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_set(__pyx_v_self->_bitset, __pyx_v_i);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":107
+      /* "pybitset/backends/cython/_bitset.pyx":108
  * 
  *     cpdef inline set(self,  size_t i):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3444,7 +3464,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":106
+  /* "pybitset/backends/cython/_bitset.pyx":107
  *             bitset_shift_right(self._bitset, s)
  * 
  *     cpdef inline set(self,  size_t i):             # <<<<<<<<<<<<<<
@@ -3471,7 +3491,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_27set(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set (wrapper)", 0);
   assert(__pyx_arg_i); {
-    __pyx_v_i = __Pyx_PyInt_As_size_t(__pyx_arg_i); if (unlikely((__pyx_v_i == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 106, __pyx_L3_error)
+    __pyx_v_i = __Pyx_PyInt_As_size_t(__pyx_arg_i); if (unlikely((__pyx_v_i == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 107, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3495,7 +3515,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_26set(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_set(__pyx_v_self, __pyx_v_i, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 106, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_set(__pyx_v_self, __pyx_v_i, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3512,7 +3532,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_26set(str
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":110
+/* "pybitset/backends/cython/_bitset.pyx":111
  *             bitset_set(self._bitset, i)
  * 
  *     cpdef inline set_to_value(self, size_t i, bint flag):             # <<<<<<<<<<<<<<
@@ -3526,7 +3546,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_to_value", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":111
+  /* "pybitset/backends/cython/_bitset.pyx":112
  * 
  *     cpdef inline set_to_value(self, size_t i, bint flag):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3541,7 +3561,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":112
+        /* "pybitset/backends/cython/_bitset.pyx":113
  *     cpdef inline set_to_value(self, size_t i, bint flag):
  *         with nogil:
  *             bitset_set_to_value(self._bitset, i, flag)             # <<<<<<<<<<<<<<
@@ -3551,7 +3571,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_set_to_value(__pyx_v_self->_bitset, __pyx_v_i, __pyx_v_flag);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":111
+      /* "pybitset/backends/cython/_bitset.pyx":112
  * 
  *     cpdef inline set_to_value(self, size_t i, bint flag):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3570,7 +3590,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":110
+  /* "pybitset/backends/cython/_bitset.pyx":111
  *             bitset_set(self._bitset, i)
  * 
  *     cpdef inline set_to_value(self, size_t i, bint flag):             # <<<<<<<<<<<<<<
@@ -3620,11 +3640,11 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_29set_to_
         case  1:
         if (likely((values[1] = __Pyx_PyDict_GetItemStr(__pyx_kwds, __pyx_n_s_flag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("set_to_value", 1, 2, 2, 1); __PYX_ERR(0, 110, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("set_to_value", 1, 2, 2, 1); __PYX_ERR(0, 111, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_to_value") < 0)) __PYX_ERR(0, 110, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "set_to_value") < 0)) __PYX_ERR(0, 111, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -3632,12 +3652,12 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_29set_to_
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
       values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
     }
-    __pyx_v_i = __Pyx_PyInt_As_size_t(values[0]); if (unlikely((__pyx_v_i == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L3_error)
-    __pyx_v_flag = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_flag == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 110, __pyx_L3_error)
+    __pyx_v_i = __Pyx_PyInt_As_size_t(values[0]); if (unlikely((__pyx_v_i == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 111, __pyx_L3_error)
+    __pyx_v_flag = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_flag == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 111, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_to_value", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 110, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_to_value", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 111, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pybitset.backends.cython._bitset.BitSet.set_to_value", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -3659,7 +3679,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_28set_to_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("set_to_value", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_set_to_value(__pyx_v_self, __pyx_v_i, __pyx_v_flag, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 110, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_set_to_value(__pyx_v_self, __pyx_v_i, __pyx_v_flag, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 111, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3676,7 +3696,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_28set_to_
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":114
+/* "pybitset/backends/cython/_bitset.pyx":115
  *             bitset_set_to_value(self._bitset, i, flag)
  * 
  *     cpdef inline bint get(self, size_t i):             # <<<<<<<<<<<<<<
@@ -3691,7 +3711,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_ge
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":116
+  /* "pybitset/backends/cython/_bitset.pyx":117
  *     cpdef inline bint get(self, size_t i):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3706,7 +3726,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_ge
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":117
+        /* "pybitset/backends/cython/_bitset.pyx":118
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_get(self._bitset, i)             # <<<<<<<<<<<<<<
@@ -3716,7 +3736,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_ge
         __pyx_v_ret = bitset_get(__pyx_v_self->_bitset, __pyx_v_i);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":116
+      /* "pybitset/backends/cython/_bitset.pyx":117
  *     cpdef inline bint get(self, size_t i):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3735,7 +3755,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_ge
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":118
+  /* "pybitset/backends/cython/_bitset.pyx":119
  *         with nogil:
  *             ret = bitset_get(self._bitset, i)
  *         return ret             # <<<<<<<<<<<<<<
@@ -3745,7 +3765,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_ge
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":114
+  /* "pybitset/backends/cython/_bitset.pyx":115
  *             bitset_set_to_value(self._bitset, i, flag)
  * 
  *     cpdef inline bint get(self, size_t i):             # <<<<<<<<<<<<<<
@@ -3771,7 +3791,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_31get(PyO
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("get (wrapper)", 0);
   assert(__pyx_arg_i); {
-    __pyx_v_i = __Pyx_PyInt_As_size_t(__pyx_arg_i); if (unlikely((__pyx_v_i == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 114, __pyx_L3_error)
+    __pyx_v_i = __Pyx_PyInt_As_size_t(__pyx_arg_i); if (unlikely((__pyx_v_i == (size_t)-1) && PyErr_Occurred())) __PYX_ERR(0, 115, __pyx_L3_error)
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3795,7 +3815,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_30get(str
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_get(__pyx_v_self, __pyx_v_i, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 114, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_get(__pyx_v_self, __pyx_v_i, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 115, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3812,7 +3832,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_30get(str
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":120
+/* "pybitset/backends/cython/_bitset.pyx":121
  *         return ret
  * 
  *     cpdef inline size_t count(self):             # <<<<<<<<<<<<<<
@@ -3827,7 +3847,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("count", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":122
+  /* "pybitset/backends/cython/_bitset.pyx":123
  *     cpdef inline size_t count(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3842,7 +3862,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":123
+        /* "pybitset/backends/cython/_bitset.pyx":124
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_count(self._bitset)             # <<<<<<<<<<<<<<
@@ -3852,7 +3872,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_count(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":122
+      /* "pybitset/backends/cython/_bitset.pyx":123
  *     cpdef inline size_t count(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3871,7 +3891,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":124
+  /* "pybitset/backends/cython/_bitset.pyx":125
  *         with nogil:
  *             ret = bitset_count(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -3881,7 +3901,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":120
+  /* "pybitset/backends/cython/_bitset.pyx":121
  *         return ret
  * 
  *     cpdef inline size_t count(self):             # <<<<<<<<<<<<<<
@@ -3918,7 +3938,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_32count(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("count", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_count(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 120, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_count(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 121, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -3935,7 +3955,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_32count(s
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":126
+/* "pybitset/backends/cython/_bitset.pyx":127
  *         return ret
  * 
  *     cpdef inline size_t minimum(self):             # <<<<<<<<<<<<<<
@@ -3950,7 +3970,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("minimum", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":128
+  /* "pybitset/backends/cython/_bitset.pyx":129
  *     cpdef inline size_t minimum(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3965,7 +3985,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":129
+        /* "pybitset/backends/cython/_bitset.pyx":130
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_minimum(self._bitset)             # <<<<<<<<<<<<<<
@@ -3975,7 +3995,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_minimum(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":128
+      /* "pybitset/backends/cython/_bitset.pyx":129
  *     cpdef inline size_t minimum(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -3994,7 +4014,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":130
+  /* "pybitset/backends/cython/_bitset.pyx":131
  *         with nogil:
  *             ret = bitset_minimum(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4004,7 +4024,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":126
+  /* "pybitset/backends/cython/_bitset.pyx":127
  *         return ret
  * 
  *     cpdef inline size_t minimum(self):             # <<<<<<<<<<<<<<
@@ -4041,7 +4061,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_34minimum
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("minimum", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_minimum(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_minimum(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4058,7 +4078,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_34minimum
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":132
+/* "pybitset/backends/cython/_bitset.pyx":133
  *         return ret
  * 
  *     cpdef inline size_t maximum(self):             # <<<<<<<<<<<<<<
@@ -4073,7 +4093,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("maximum", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":134
+  /* "pybitset/backends/cython/_bitset.pyx":135
  *     cpdef inline size_t maximum(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4088,7 +4108,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":135
+        /* "pybitset/backends/cython/_bitset.pyx":136
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_maximum(self._bitset)             # <<<<<<<<<<<<<<
@@ -4098,7 +4118,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_maximum(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":134
+      /* "pybitset/backends/cython/_bitset.pyx":135
  *     cpdef inline size_t maximum(self):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4117,7 +4137,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":136
+  /* "pybitset/backends/cython/_bitset.pyx":137
  *         with nogil:
  *             ret = bitset_maximum(self._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4127,7 +4147,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":132
+  /* "pybitset/backends/cython/_bitset.pyx":133
  *         return ret
  * 
  *     cpdef inline size_t maximum(self):             # <<<<<<<<<<<<<<
@@ -4164,7 +4184,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_36maximum
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("maximum", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_maximum(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 132, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_maximum(__pyx_v_self, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 133, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4181,7 +4201,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_36maximum
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":138
+/* "pybitset/backends/cython/_bitset.pyx":139
  *         return ret
  * 
  *     cpdef inline bint inplace_union(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4196,7 +4216,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_union", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":140
+  /* "pybitset/backends/cython/_bitset.pyx":141
  *     cpdef inline bint inplace_union(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4211,7 +4231,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":141
+        /* "pybitset/backends/cython/_bitset.pyx":142
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_inplace_union(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4221,7 +4241,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
         __pyx_v_ret = bitset_inplace_union(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":140
+      /* "pybitset/backends/cython/_bitset.pyx":141
  *     cpdef inline bint inplace_union(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4240,7 +4260,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":142
+  /* "pybitset/backends/cython/_bitset.pyx":143
  *         with nogil:
  *             ret = bitset_inplace_union(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4250,7 +4270,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":138
+  /* "pybitset/backends/cython/_bitset.pyx":139
  *         return ret
  * 
  *     cpdef inline bint inplace_union(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4274,7 +4294,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_39inplace
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_union (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 138, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 139, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_38inplace_union(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -4295,7 +4315,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_38inplace
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inplace_union", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_union(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 138, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_union(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4312,7 +4332,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_38inplace
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":144
+/* "pybitset/backends/cython/_bitset.pyx":145
  *         return ret
  * 
  *     cpdef inline size_t union_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4327,7 +4347,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("union_count", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":146
+  /* "pybitset/backends/cython/_bitset.pyx":147
  *     cpdef inline size_t union_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4342,7 +4362,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":147
+        /* "pybitset/backends/cython/_bitset.pyx":148
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_union_count(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4352,7 +4372,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_union_count(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":146
+      /* "pybitset/backends/cython/_bitset.pyx":147
  *     cpdef inline size_t union_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4371,7 +4391,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":148
+  /* "pybitset/backends/cython/_bitset.pyx":149
  *         with nogil:
  *             ret = bitset_union_count(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4381,7 +4401,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":144
+  /* "pybitset/backends/cython/_bitset.pyx":145
  *         return ret
  * 
  *     cpdef inline size_t union_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4405,7 +4425,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_41union_c
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("union_count (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 144, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 145, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_40union_count(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -4426,7 +4446,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_40union_c
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("union_count", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_union_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_union_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4443,7 +4463,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_40union_c
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":150
+/* "pybitset/backends/cython/_bitset.pyx":151
  *         return ret
  * 
  *     cpdef inline inplace_intersection(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4457,7 +4477,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_intersection", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":151
+  /* "pybitset/backends/cython/_bitset.pyx":152
  * 
  *     cpdef inline inplace_intersection(self, BitSet b2):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4472,7 +4492,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":152
+        /* "pybitset/backends/cython/_bitset.pyx":153
  *     cpdef inline inplace_intersection(self, BitSet b2):
  *         with nogil:
  *             bitset_inplace_intersection(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4482,7 +4502,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_inplace_intersection(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":151
+      /* "pybitset/backends/cython/_bitset.pyx":152
  * 
  *     cpdef inline inplace_intersection(self, BitSet b2):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4501,7 +4521,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":150
+  /* "pybitset/backends/cython/_bitset.pyx":151
  *         return ret
  * 
  *     cpdef inline inplace_intersection(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4526,7 +4546,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_43inplace
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_intersection (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 150, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 151, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_42inplace_intersection(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -4547,7 +4567,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_42inplace
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inplace_intersection", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_intersection(__pyx_v_self, __pyx_v_b2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_intersection(__pyx_v_self, __pyx_v_b2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4564,7 +4584,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_42inplace
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":154
+/* "pybitset/backends/cython/_bitset.pyx":155
  *             bitset_inplace_intersection(self._bitset, b2._bitset)
  * 
  *     cpdef inline size_t intersection_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4579,7 +4599,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersection_count", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":156
+  /* "pybitset/backends/cython/_bitset.pyx":157
  *     cpdef inline size_t intersection_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4594,7 +4614,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":157
+        /* "pybitset/backends/cython/_bitset.pyx":158
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_intersection_count(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4604,7 +4624,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_intersection_count(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":156
+      /* "pybitset/backends/cython/_bitset.pyx":157
  *     cpdef inline size_t intersection_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4623,7 +4643,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":158
+  /* "pybitset/backends/cython/_bitset.pyx":159
  *         with nogil:
  *             ret = bitset_intersection_count(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4633,7 +4653,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":154
+  /* "pybitset/backends/cython/_bitset.pyx":155
  *             bitset_inplace_intersection(self._bitset, b2._bitset)
  * 
  *     cpdef inline size_t intersection_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4657,7 +4677,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_45interse
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersection_count (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 154, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 155, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_44intersection_count(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -4678,7 +4698,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_44interse
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersection_count", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_intersection_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 154, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_intersection_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 155, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4695,7 +4715,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_44interse
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":160
+/* "pybitset/backends/cython/_bitset.pyx":161
  *         return ret
  * 
  *     cpdef inline bint disjoint(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4710,7 +4730,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_di
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("disjoint", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":162
+  /* "pybitset/backends/cython/_bitset.pyx":163
  *     cpdef inline bint disjoint(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4725,7 +4745,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_di
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":163
+        /* "pybitset/backends/cython/_bitset.pyx":164
  *         cdef bint ret
  *         with nogil:
  *             ret = bitsets_disjoint(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4735,7 +4755,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_di
         __pyx_v_ret = bitsets_disjoint(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":162
+      /* "pybitset/backends/cython/_bitset.pyx":163
  *     cpdef inline bint disjoint(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4754,7 +4774,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_di
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":164
+  /* "pybitset/backends/cython/_bitset.pyx":165
  *         with nogil:
  *             ret = bitsets_disjoint(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4764,7 +4784,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_di
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":160
+  /* "pybitset/backends/cython/_bitset.pyx":161
  *         return ret
  * 
  *     cpdef inline bint disjoint(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4788,7 +4808,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_47disjoin
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("disjoint (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 160, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 161, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_46disjoint(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -4809,7 +4829,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_46disjoin
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("disjoint", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_disjoint(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_disjoint(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4826,7 +4846,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_46disjoin
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":166
+/* "pybitset/backends/cython/_bitset.pyx":167
  *         return ret
  * 
  *     cpdef inline bint intersect(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4841,7 +4861,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersect", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":168
+  /* "pybitset/backends/cython/_bitset.pyx":169
  *     cpdef inline bint intersect(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4856,7 +4876,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":169
+        /* "pybitset/backends/cython/_bitset.pyx":170
  *         cdef bint ret
  *         with nogil:
  *             ret = bitsets_intersect(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4866,7 +4886,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
         __pyx_v_ret = bitsets_intersect(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":168
+      /* "pybitset/backends/cython/_bitset.pyx":169
  *     cpdef inline bint intersect(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4885,7 +4905,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":170
+  /* "pybitset/backends/cython/_bitset.pyx":171
  *         with nogil:
  *             ret = bitsets_intersect(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -4895,7 +4915,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":166
+  /* "pybitset/backends/cython/_bitset.pyx":167
  *         return ret
  * 
  *     cpdef inline bint intersect(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4919,7 +4939,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_49interse
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("intersect (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 167, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_48intersect(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -4940,7 +4960,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_48interse
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("intersect", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_intersect(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_intersect(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -4957,7 +4977,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_48interse
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":172
+/* "pybitset/backends/cython/_bitset.pyx":173
  *         return ret
  * 
  *     cpdef inline bint contains_all(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -4972,7 +4992,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_co
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("contains_all", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":174
+  /* "pybitset/backends/cython/_bitset.pyx":175
  *     cpdef inline bint contains_all(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -4987,7 +5007,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_co
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":175
+        /* "pybitset/backends/cython/_bitset.pyx":176
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_contains_all(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -4997,7 +5017,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_co
         __pyx_v_ret = bitset_contains_all(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":174
+      /* "pybitset/backends/cython/_bitset.pyx":175
  *     cpdef inline bint contains_all(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5016,7 +5036,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_co
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":176
+  /* "pybitset/backends/cython/_bitset.pyx":177
  *         with nogil:
  *             ret = bitset_contains_all(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -5026,7 +5046,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_co
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":172
+  /* "pybitset/backends/cython/_bitset.pyx":173
  *         return ret
  * 
  *     cpdef inline bint contains_all(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5050,7 +5070,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_51contain
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("contains_all (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 172, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 173, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_50contains_all(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -5071,7 +5091,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_50contain
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("contains_all", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_contains_all(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_contains_all(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5088,7 +5108,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_50contain
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":178
+/* "pybitset/backends/cython/_bitset.pyx":179
  *         return ret
  * 
  *     cpdef inline inplace_difference(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5102,7 +5122,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_difference", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":179
+  /* "pybitset/backends/cython/_bitset.pyx":180
  * 
  *     cpdef inline inplace_difference(self, BitSet b2):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5117,7 +5137,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":180
+        /* "pybitset/backends/cython/_bitset.pyx":181
  *     cpdef inline inplace_difference(self, BitSet b2):
  *         with nogil:
  *             bitset_inplace_difference(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -5127,7 +5147,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_inplace_difference(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":179
+      /* "pybitset/backends/cython/_bitset.pyx":180
  * 
  *     cpdef inline inplace_difference(self, BitSet b2):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5146,7 +5166,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":178
+  /* "pybitset/backends/cython/_bitset.pyx":179
  *         return ret
  * 
  *     cpdef inline inplace_difference(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5171,7 +5191,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_53inplace
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_difference (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 178, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 179, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_52inplace_difference(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -5192,7 +5212,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_52inplace
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inplace_difference", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_difference(__pyx_v_self, __pyx_v_b2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_difference(__pyx_v_self, __pyx_v_b2, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5209,7 +5229,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_52inplace
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":182
+/* "pybitset/backends/cython/_bitset.pyx":183
  *             bitset_inplace_difference(self._bitset, b2._bitset)
  * 
  *     cpdef inline size_t difference_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5224,7 +5244,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("difference_count", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":184
+  /* "pybitset/backends/cython/_bitset.pyx":185
  *     cpdef inline size_t difference_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5239,7 +5259,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":185
+        /* "pybitset/backends/cython/_bitset.pyx":186
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_difference_count(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -5249,7 +5269,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_difference_count(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":184
+      /* "pybitset/backends/cython/_bitset.pyx":185
  *     cpdef inline size_t difference_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5268,7 +5288,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":186
+  /* "pybitset/backends/cython/_bitset.pyx":187
  *         with nogil:
  *             ret = bitset_difference_count(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -5278,7 +5298,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":182
+  /* "pybitset/backends/cython/_bitset.pyx":183
  *             bitset_inplace_difference(self._bitset, b2._bitset)
  * 
  *     cpdef inline size_t difference_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5302,7 +5322,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_55differe
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("difference_count (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 182, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 183, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_54difference_count(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -5323,7 +5343,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_54differe
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("difference_count", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_difference_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_difference_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5340,7 +5360,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_54differe
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":188
+/* "pybitset/backends/cython/_bitset.pyx":189
  *         return ret
  * 
  *     cpdef inline bint inplace_symmetric_difference(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5355,7 +5375,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_symmetric_difference", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":190
+  /* "pybitset/backends/cython/_bitset.pyx":191
  *     cpdef inline bint inplace_symmetric_difference(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5370,7 +5390,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":191
+        /* "pybitset/backends/cython/_bitset.pyx":192
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_inplace_symmetric_difference(self._bitset, b2._bitset)             # <<<<<<<<<<<<<<
@@ -5380,7 +5400,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
         __pyx_v_ret = bitset_inplace_symmetric_difference(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":190
+      /* "pybitset/backends/cython/_bitset.pyx":191
  *     cpdef inline bint inplace_symmetric_difference(self, BitSet b2):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5399,7 +5419,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":192
+  /* "pybitset/backends/cython/_bitset.pyx":193
  *         with nogil:
  *             ret = bitset_inplace_symmetric_difference(self._bitset, b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -5409,7 +5429,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_in
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":188
+  /* "pybitset/backends/cython/_bitset.pyx":189
  *         return ret
  * 
  *     cpdef inline bint inplace_symmetric_difference(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5433,7 +5453,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_57inplace
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("inplace_symmetric_difference (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 188, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 189, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_56inplace_symmetric_difference(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -5454,7 +5474,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_56inplace
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("inplace_symmetric_difference", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_symmetric_difference(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_inplace_symmetric_difference(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5471,7 +5491,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_56inplace
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":194
+/* "pybitset/backends/cython/_bitset.pyx":195
  *         return ret
  * 
  *     cpdef inline size_t symmetric_difference_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5486,7 +5506,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("symmetric_difference_count", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":196
+  /* "pybitset/backends/cython/_bitset.pyx":197
  *     cpdef inline size_t symmetric_difference_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5501,7 +5521,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":197
+        /* "pybitset/backends/cython/_bitset.pyx":198
  *         cdef size_t ret
  *         with nogil:
  *             ret = bitset_symmetric_difference_count(self._bitset,  b2._bitset)             # <<<<<<<<<<<<<<
@@ -5511,7 +5531,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
         __pyx_v_ret = bitset_symmetric_difference_count(__pyx_v_self->_bitset, __pyx_v_b2->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":196
+      /* "pybitset/backends/cython/_bitset.pyx":197
  *     cpdef inline size_t symmetric_difference_count(self, BitSet b2):
  *         cdef size_t ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5530,7 +5550,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":198
+  /* "pybitset/backends/cython/_bitset.pyx":199
  *         with nogil:
  *             ret = bitset_symmetric_difference_count(self._bitset,  b2._bitset)
  *         return ret             # <<<<<<<<<<<<<<
@@ -5540,7 +5560,7 @@ static CYTHON_INLINE size_t __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":194
+  /* "pybitset/backends/cython/_bitset.pyx":195
  *         return ret
  * 
  *     cpdef inline size_t symmetric_difference_count(self, BitSet b2):             # <<<<<<<<<<<<<<
@@ -5564,7 +5584,7 @@ static PyObject *__pyx_pw_8pybitset_8backends_6cython_7_bitset_6BitSet_59symmetr
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("symmetric_difference_count (wrapper)", 0);
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 194, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b2), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b2", 0))) __PYX_ERR(0, 195, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_58symmetric_difference_count(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_self), ((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSet *)__pyx_v_b2));
 
   /* function exit code */
@@ -5585,7 +5605,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_58symmetr
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("symmetric_difference_count", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_symmetric_difference_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_FromSize_t(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_symmetric_difference_count(__pyx_v_self, __pyx_v_b2, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5602,7 +5622,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_58symmetr
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":200
+/* "pybitset/backends/cython/_bitset.pyx":201
  *         return ret
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -5632,7 +5652,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_60__iter_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__iter__", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":201
+  /* "pybitset/backends/cython/_bitset.pyx":202
  * 
  *     def __iter__(self):
  *         return BitSetIter(self)             # <<<<<<<<<<<<<<
@@ -5640,13 +5660,13 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_60__iter_
  *     cpdef inline bint for_each(self, object func):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSetIter), ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_CallOneArg(((PyObject *)__pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSetIter), ((PyObject *)__pyx_v_self)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 202, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":200
+  /* "pybitset/backends/cython/_bitset.pyx":201
  *         return ret
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -5665,7 +5685,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_60__iter_
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":203
+/* "pybitset/backends/cython/_bitset.pyx":204
  *         return BitSetIter(self)
  * 
  *     cpdef inline bint for_each(self, object func):             # <<<<<<<<<<<<<<
@@ -5680,7 +5700,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fo
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("for_each", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":205
+  /* "pybitset/backends/cython/_bitset.pyx":206
  *     cpdef inline bint for_each(self, object func):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5695,7 +5715,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fo
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":206
+        /* "pybitset/backends/cython/_bitset.pyx":207
  *         cdef bint ret
  *         with nogil:
  *             ret = bitset_for_each(self._bitset, bitset_iterator_func, <void*>func)             # <<<<<<<<<<<<<<
@@ -5705,7 +5725,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fo
         __pyx_v_ret = bitset_for_each(__pyx_v_self->_bitset, __pyx_f_8pybitset_8backends_6cython_7_bitset_bitset_iterator_func, ((void *)__pyx_v_func));
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":205
+      /* "pybitset/backends/cython/_bitset.pyx":206
  *     cpdef inline bint for_each(self, object func):
  *         cdef bint ret
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5724,7 +5744,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fo
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":207
+  /* "pybitset/backends/cython/_bitset.pyx":208
  *         with nogil:
  *             ret = bitset_for_each(self._bitset, bitset_iterator_func, <void*>func)
  *         return ret             # <<<<<<<<<<<<<<
@@ -5734,7 +5754,7 @@ static CYTHON_INLINE int __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_fo
   __pyx_r = __pyx_v_ret;
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":203
+  /* "pybitset/backends/cython/_bitset.pyx":204
  *         return BitSetIter(self)
  * 
  *     cpdef inline bint for_each(self, object func):             # <<<<<<<<<<<<<<
@@ -5771,7 +5791,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_62for_eac
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("for_each", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_for_each(__pyx_v_self, __pyx_v_func, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_for_each(__pyx_v_self, __pyx_v_func, 1)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 204, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5788,7 +5808,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_62for_eac
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":209
+/* "pybitset/backends/cython/_bitset.pyx":210
  *         return ret
  * 
  *     cpdef inline print(self):             # <<<<<<<<<<<<<<
@@ -5802,7 +5822,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("print", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":210
+  /* "pybitset/backends/cython/_bitset.pyx":211
  * 
  *     cpdef inline print(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5817,7 +5837,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       #endif
       /*try:*/ {
 
-        /* "pybitset/backends/cython/_bitset.pyx":211
+        /* "pybitset/backends/cython/_bitset.pyx":212
  *     cpdef inline print(self):
  *         with nogil:
  *             bitset_print(self._bitset)             # <<<<<<<<<<<<<<
@@ -5827,7 +5847,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
         bitset_print(__pyx_v_self->_bitset);
       }
 
-      /* "pybitset/backends/cython/_bitset.pyx":210
+      /* "pybitset/backends/cython/_bitset.pyx":211
  * 
  *     cpdef inline print(self):
  *         with nogil:             # <<<<<<<<<<<<<<
@@ -5846,7 +5866,7 @@ static CYTHON_INLINE PyObject *__pyx_f_8pybitset_8backends_6cython_7_bitset_6Bit
       }
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":209
+  /* "pybitset/backends/cython/_bitset.pyx":210
  *         return ret
  * 
  *     cpdef inline print(self):             # <<<<<<<<<<<<<<
@@ -5884,7 +5904,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_64print(s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("print", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_print(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_8pybitset_8backends_6cython_7_bitset_6BitSet_print(__pyx_v_self, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 210, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -6016,7 +6036,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_6BitSet_68__setst
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":222
+/* "pybitset/backends/cython/_bitset.pyx":223
  *         size_t i
  * 
  *     def __cinit__(self, BitSet b):             # <<<<<<<<<<<<<<
@@ -6053,7 +6073,7 @@ static int __pyx_pw_8pybitset_8backends_6cython_7_bitset_10BitSetIter_1__cinit__
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 222, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__cinit__") < 0)) __PYX_ERR(0, 223, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 1) {
       goto __pyx_L5_argtuple_error;
@@ -6064,13 +6084,13 @@ static int __pyx_pw_8pybitset_8backends_6cython_7_bitset_10BitSetIter_1__cinit__
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 222, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__cinit__", 1, 1, 1, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 223, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("pybitset.backends.cython._bitset.BitSetIter.__cinit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return -1;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b", 0))) __PYX_ERR(0, 222, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_b), __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet, 1, "b", 0))) __PYX_ERR(0, 223, __pyx_L1_error)
   __pyx_r = __pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter___cinit__(((struct __pyx_obj_8pybitset_8backends_6cython_7_bitset_BitSetIter *)__pyx_v_self), __pyx_v_b);
 
   /* function exit code */
@@ -6087,7 +6107,7 @@ static int __pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter___cinit__(
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__cinit__", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":223
+  /* "pybitset/backends/cython/_bitset.pyx":224
  * 
  *     def __cinit__(self, BitSet b):
  *         self.b = b             # <<<<<<<<<<<<<<
@@ -6100,7 +6120,7 @@ static int __pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter___cinit__(
   __Pyx_DECREF(((PyObject *)__pyx_v_self->b));
   __pyx_v_self->b = __pyx_v_b;
 
-  /* "pybitset/backends/cython/_bitset.pyx":224
+  /* "pybitset/backends/cython/_bitset.pyx":225
  *     def __cinit__(self, BitSet b):
  *         self.b = b
  *         self.i = 0             # <<<<<<<<<<<<<<
@@ -6109,7 +6129,7 @@ static int __pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter___cinit__(
  */
   __pyx_v_self->i = 0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":222
+  /* "pybitset/backends/cython/_bitset.pyx":223
  *         size_t i
  * 
  *     def __cinit__(self, BitSet b):             # <<<<<<<<<<<<<<
@@ -6123,7 +6143,7 @@ static int __pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter___cinit__(
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":226
+/* "pybitset/backends/cython/_bitset.pyx":227
  *         self.i = 0
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -6149,7 +6169,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_2__i
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__iter__", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":227
+  /* "pybitset/backends/cython/_bitset.pyx":228
  * 
  *     def __iter__(self):
  *         return self             # <<<<<<<<<<<<<<
@@ -6161,7 +6181,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_2__i
   __pyx_r = ((PyObject *)__pyx_v_self);
   goto __pyx_L0;
 
-  /* "pybitset/backends/cython/_bitset.pyx":226
+  /* "pybitset/backends/cython/_bitset.pyx":227
  *         self.i = 0
  * 
  *     def __iter__(self):             # <<<<<<<<<<<<<<
@@ -6176,7 +6196,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_2__i
   return __pyx_r;
 }
 
-/* "pybitset/backends/cython/_bitset.pyx":229
+/* "pybitset/backends/cython/_bitset.pyx":230
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -6209,7 +6229,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_4__n
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__next__", 0);
 
-  /* "pybitset/backends/cython/_bitset.pyx":231
+  /* "pybitset/backends/cython/_bitset.pyx":232
  *     def __next__(self):
  *         cdef size_t tmp
  *         if bitset_next_set_bit(self.b._bitset, &self.i):             # <<<<<<<<<<<<<<
@@ -6219,7 +6239,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_4__n
   __pyx_t_1 = (bitset_next_set_bit(__pyx_v_self->b->_bitset, (&__pyx_v_self->i)) != 0);
   if (likely(__pyx_t_1)) {
 
-    /* "pybitset/backends/cython/_bitset.pyx":232
+    /* "pybitset/backends/cython/_bitset.pyx":233
  *         cdef size_t tmp
  *         if bitset_next_set_bit(self.b._bitset, &self.i):
  *             tmp = self.i             # <<<<<<<<<<<<<<
@@ -6229,7 +6249,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_4__n
     __pyx_t_2 = __pyx_v_self->i;
     __pyx_v_tmp = __pyx_t_2;
 
-    /* "pybitset/backends/cython/_bitset.pyx":233
+    /* "pybitset/backends/cython/_bitset.pyx":234
  *         if bitset_next_set_bit(self.b._bitset, &self.i):
  *             tmp = self.i
  *             self.i += 1             # <<<<<<<<<<<<<<
@@ -6238,7 +6258,7 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_4__n
  */
     __pyx_v_self->i = (__pyx_v_self->i + 1);
 
-    /* "pybitset/backends/cython/_bitset.pyx":234
+    /* "pybitset/backends/cython/_bitset.pyx":235
  *             tmp = self.i
  *             self.i += 1
  *             return tmp             # <<<<<<<<<<<<<<
@@ -6246,13 +6266,13 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_4__n
  *             raise StopIteration
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_tmp); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 234, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_FromSize_t(__pyx_v_tmp); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 235, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_r = __pyx_t_3;
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "pybitset/backends/cython/_bitset.pyx":231
+    /* "pybitset/backends/cython/_bitset.pyx":232
  *     def __next__(self):
  *         cdef size_t tmp
  *         if bitset_next_set_bit(self.b._bitset, &self.i):             # <<<<<<<<<<<<<<
@@ -6261,17 +6281,17 @@ static PyObject *__pyx_pf_8pybitset_8backends_6cython_7_bitset_10BitSetIter_4__n
  */
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":236
+  /* "pybitset/backends/cython/_bitset.pyx":237
  *             return tmp
  *         else:
  *             raise StopIteration             # <<<<<<<<<<<<<<
  */
   /*else*/ {
     __Pyx_Raise(__pyx_builtin_StopIteration, 0, 0, 0);
-    __PYX_ERR(0, 236, __pyx_L1_error)
+    __PYX_ERR(0, 237, __pyx_L1_error)
   }
 
-  /* "pybitset/backends/cython/_bitset.pyx":229
+  /* "pybitset/backends/cython/_bitset.pyx":230
  *         return self
  * 
  *     def __next__(self):             # <<<<<<<<<<<<<<
@@ -6741,7 +6761,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
   __pyx_builtin_MemoryError = __Pyx_GetBuiltinName(__pyx_n_s_MemoryError); if (!__pyx_builtin_MemoryError) __PYX_ERR(0, 34, __pyx_L1_error)
   __pyx_builtin_TypeError = __Pyx_GetBuiltinName(__pyx_n_s_TypeError); if (!__pyx_builtin_TypeError) __PYX_ERR(1, 2, __pyx_L1_error)
-  __pyx_builtin_StopIteration = __Pyx_GetBuiltinName(__pyx_n_s_StopIteration); if (!__pyx_builtin_StopIteration) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_builtin_StopIteration = __Pyx_GetBuiltinName(__pyx_n_s_StopIteration); if (!__pyx_builtin_StopIteration) __PYX_ERR(0, 237, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -6884,14 +6904,14 @@ static int __Pyx_modinit_type_init_code(void) {
   if (PyObject_SetAttr(__pyx_m, __pyx_n_s_BitSet, (PyObject *)&__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSet) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
   if (__Pyx_setup_reduce((PyObject*)&__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSet) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
   __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSet = &__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSet;
-  if (PyType_Ready(&__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter) < 0) __PYX_ERR(0, 217, __pyx_L1_error)
+  if (PyType_Ready(&__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
   #if PY_VERSION_HEX < 0x030800B1
   __pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter.tp_print = 0;
   #endif
   if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter.tp_dictoffset && __pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter.tp_getattro == PyObject_GenericGetAttr)) {
     __pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter.tp_getattro = __Pyx_PyObject_GenericGetAttrNoDict;
   }
-  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter) < 0) __PYX_ERR(0, 217, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject*)&__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter) < 0) __PYX_ERR(0, 218, __pyx_L1_error)
   __pyx_ptype_8pybitset_8backends_6cython_7_bitset_BitSetIter = &__pyx_type_8pybitset_8backends_6cython_7_bitset_BitSetIter;
   __Pyx_RefNannyFinishContext();
   return 0;

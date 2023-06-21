@@ -36,7 +36,8 @@ cdef class BitSet:
             self._bitset = NULL
 
     def __dealloc__(self):
-        bitset_free(self._bitset)
+        if self._bitset:
+            bitset_free(self._bitset)
         self._bitset = NULL
 
     @staticmethod
