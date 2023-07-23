@@ -4,7 +4,7 @@
 
 cdef extern from "bitset.h" nogil:
     ctypedef struct bitset_t
-
+    ctypedef int bool
     bitset_t* bitset_create()
     bitset_t *bitset_create_with_capacity( size_t size )
     void bitset_free(bitset_t *bitset)
@@ -47,6 +47,6 @@ cdef extern from "bitset.h" nogil:
     bint bitset_next_set_bit(const bitset_t *bitset, size_t *i)
     size_t bitset_next_set_bits(const bitset_t *bitset, size_t *buffer, size_t capacity, size_t * startfrom)
 
-    ctypedef bint(*bitset_iterator)(size_t value, void *param);
+    ctypedef bool (*bitset_iterator)(size_t value, void *param) with gil
     bint bitset_for_each(const bitset_t *b, bitset_iterator iterator, void *ptr)
     void bitset_print(const bitset_t *b)

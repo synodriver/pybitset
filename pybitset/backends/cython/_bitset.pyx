@@ -13,10 +13,10 @@ from pybitset.backends.cython.bitset cimport (
     bitset_set, bitset_set_to_value, bitset_shift_left, bitset_shift_right,
     bitset_size_in_bits, bitset_size_in_bytes, bitset_size_in_words,
     bitset_symmetric_difference_count, bitset_t, bitset_trim,
-    bitset_union_count, bitsets_disjoint, bitsets_intersect)
+    bitset_union_count, bitsets_disjoint, bitsets_intersect, bool)
 
 
-cdef bint bitset_iterator_func(size_t value, void *param) with gil:
+cdef bool bitset_iterator_func(size_t value, void *param) noexcept with gil:
     return (<object>param)(value)
 
 @cython.freelist(8)
