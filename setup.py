@@ -68,6 +68,9 @@ def has_option(name: str) -> bool:
     if name in sys.argv[1:]:
         sys.argv.remove(name)
         return True
+    name = name.strip("-").upper()
+    if os.environ.get(name, None) is not None:
+        return True
     return False
 
 
@@ -119,7 +122,6 @@ def main():
             "Programming Language :: C",
             "Programming Language :: Cython",
             "Programming Language :: Python",
-            "Programming Language :: Python :: 3.7",
             "Programming Language :: Python :: 3.8",
             "Programming Language :: Python :: 3.9",
             "Programming Language :: Python :: 3.10",
